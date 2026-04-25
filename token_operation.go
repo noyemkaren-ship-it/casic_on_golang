@@ -1,12 +1,21 @@
 package main
 
-import "math/rand"
+import (
+	"crypto/rand"
+	"math/big"
+)
 
-func GenerateToken(length int) string {
+func GenerateToken(length int) (string, error) {
 	chars := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	result := make([]byte, length)
+
 	for i := range result {
-		result[i] = chars[rand.Intn(len(chars))]
+		index, err := rand.Int(rand.Reader, big.NewInt(int64(len(chars))))
+		if err != nil {
+			return "", err
+		}
+		result[i] = chars[index.Int64()]
 	}
-	return string(result)
+
+	return string(result), nil
 }

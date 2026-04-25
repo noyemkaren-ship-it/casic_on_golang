@@ -23,7 +23,10 @@ func create_user(name string, password string) {
 	db.Where("name = ?", name).Find(&existingUsers)
 
 	if len(existingUsers) == 0 {
-		token := GenerateToken(32)
+		token, err := GenerateToken(32)
+		if err != nil {
+			panic("Не смогли создать")
+		}
 		user := User{Name: name, Password: password, Balance: 0, Token: token}
 		db.Create(&user)
 	}
