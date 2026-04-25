@@ -23,25 +23,29 @@ func create_user(name string, password string) {
 	db.Where("name = ?", name).Find(&existingUsers)
 
 	if len(existingUsers) == 0 {
+		hashedPassword, err := HashPassword(password)
+		if err != nil {
+			panic("Не смогли захэшировать пароль")
+		}
+
 		token, err := GenerateToken(32)
 		if err != nil {
-			panic("Не смогли создать")
+			panic("Не смогли создать токен")
 		}
-		user := User{Name: name, Password: password, Balance: 0, Token: token}
+
+		user := User{Name: name, Password: hashedPassword, Balance: 0, Token: token}
 		db.Create(&user)
 	}
 }
 
 func login(name string, password string) bool {
-	var users []User
-	db.Where("name = ? AND password = ?", name, password).Find(&users)
-
-	if len(users) > 0 {
-		return true
+	var user User
+	result := db.Where("name = ?", name).First(&user)
+	if result.Error != nil {
+		return false
 	}
-	return false
+	return CheckPassword(password, user.Password)
 }
-
 func change_balance(token string, amount int) string {
 	var user User
 	result := db.Where("token = ?", token).First(&user)
