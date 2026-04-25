@@ -60,8 +60,9 @@ fi
 # Коммитим
 git commit -m "$commit_message"
 
-# Пушим (первый раз с upstream)
-git push -u origin main
+# Определяем текущую ветку
+BRANCH=$(git branch --show-current)
+git push -u origin "$BRANCH"
 
 echo "✅ Проект запушен на GitHub!"
 echo "🔗 Проверяй: $repo_url"
