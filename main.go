@@ -88,5 +88,9 @@ func main() {
 		c.JSON(200, gin.H{"message": "ok"})
 	})
 
+	r.GET("/chinese", func(c *gin.Context) {
+		c.HTML(200, "ch.html", nil)
+	})
+
 	r.Run(":2222")
 }
