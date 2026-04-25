@@ -31,7 +31,7 @@ func main() {
 		password := c.PostForm("password")
 		create_user(name, password)
 		token := get_token(name)
-		c.SetCookie("token", token, 3600*24*7, "/", "localhost", false, true)
+		c.SetCookie("token", token, 3600*24*7, "/", "", false, true)
 		c.Redirect(302, "/")
 	})
 
@@ -44,7 +44,7 @@ func main() {
 		password := c.PostForm("password")
 		if login(name, password) {
 			token := get_token(name)
-			c.SetCookie("token", token, 3600*24*7, "/", "localhost", false, true)
+			c.SetCookie("token", token, 3600*24*7, "/", "", false, true)
 			c.Redirect(302, "/")
 		} else {
 			c.HTML(200, "login.html", gin.H{"Error": "Неверные данные"})
@@ -52,7 +52,7 @@ func main() {
 	})
 
 	r.GET("/logout", func(c *gin.Context) {
-		c.SetCookie("token", "", -1, "/", "localhost", false, true)
+		c.SetCookie("token", "", -1, "/", "", false, true)
 		c.Redirect(302, "/login")
 	})
 
