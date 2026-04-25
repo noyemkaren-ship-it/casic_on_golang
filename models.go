@@ -1,0 +1,13 @@
+package main
+
+import (
+	"gorm.io/gorm"
+)
+
+type User struct {
+	gorm.Model
+	Name     string
+	Password string
+	Balance  int
+	Token    string
+}

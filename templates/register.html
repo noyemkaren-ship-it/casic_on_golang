@@ -1,0 +1,67 @@
+<!-- templates/register.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐅 Регистрация</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #1a1a2e;
+            color: #cdd6f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .box {
+            background: #252536;
+            padding: 40px;
+            border-radius: 16px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+        h1 { color: #f5c542; margin-bottom: 20px; }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #45475a;
+            background: #1e1e2e;
+            color: #fff;
+            font-size: 1rem;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #a6e3a1;
+            color: #1a1a2e;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover { background: #89d48a; }
+        a { color: #89b4fa; text-decoration: none; font-size: 0.9rem; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>🐅 Регистрация</h1>
+        <form action="/register" method="POST">
+            <input type="text" name="name" placeholder="Имя" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+            <button type="submit">Создать аккаунт</button>
+        </form>
+        <br>
+        <a href="/login">Уже есть аккаунт? Войти</a>
+    </div>
+</body>
+</html>
